@@ -21,15 +21,29 @@
 #   recommended to use a multi-core machine for the preprocessing 
 #   step and set this value to the number of cores.
 # PYTHON - python3 interpreter alias.
-TRAIN_DIR=my_training_dir
-VAL_DIR=my_val_dir
-TEST_DIR=my_test_dir
-DATASET_NAME=my_dataset
+#cd "/mnt/c/Users/Akhil Chandra/Desktop/BTP"
+# TRAIN_DIR=my_training_dir
+# VAL_DIR=my_val_dir
+# TEST_DIR=my_test_dir
+# DATASET_NAME=my_dataset
+# MAX_DATA_CONTEXTS=1000
+# MAX_CONTEXTS=200
+# SUBTOKEN_VOCAB_SIZE=186277
+# TARGET_VOCAB_SIZE=26347
+# NUM_THREADS=64
+# PYTHON=python3
+#added "" to every instance of the below part
+
+
+TRAIN_DIR="/mnt/c/Users/Akhil Chandra/Desktop/btp/CodeSearchNet/notebooks/train_dummy"
+VAL_DIR="/mnt/c/Users/Akhil Chandra/Desktop/btp/CodeSearchNet/notebooks/valid_dummy"
+TEST_DIR="/mnt/c/Users/Akhil Chandra/Desktop/btp/CodeSearchNet/notebooks/test_code_codesearchnet"
+DATASET_NAME=preproc_codesearch
 MAX_DATA_CONTEXTS=1000
 MAX_CONTEXTS=200
 SUBTOKEN_VOCAB_SIZE=186277
 TARGET_VOCAB_SIZE=26347
-NUM_THREADS=64
+NUM_THREADS=4
 PYTHON=python3
 ###########################################################
 
@@ -42,13 +56,13 @@ mkdir -p data
 mkdir -p data/${DATASET_NAME}
 
 echo "Extracting paths from validation set..."
-${PYTHON} JavaExtractor/extract.py --dir ${VAL_DIR} --max_path_length 8 --max_path_width 2 --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} > ${VAL_DATA_FILE} 2>> error_log.txt
+${PYTHON} JavaExtractor/extract.py --dir "${VAL_DIR}" --max_path_length 8 --max_path_width 2 --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} > ${VAL_DATA_FILE} 2>> error_log.txt
 echo "Finished extracting paths from validation set"
 echo "Extracting paths from test set..."
-${PYTHON} JavaExtractor/extract.py --dir ${TEST_DIR} --max_path_length 8 --max_path_width 2 --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} > ${TEST_DATA_FILE} 2>> error_log.txt
+${PYTHON} JavaExtractor/extract.py --dir "${TEST_DIR}" --max_path_length 8 --max_path_width 2 --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} > ${TEST_DATA_FILE} 2>> error_log.txt
 echo "Finished extracting paths from test set"
 echo "Extracting paths from training set..."
-${PYTHON} JavaExtractor/extract.py --dir ${TRAIN_DIR} --max_path_length 8 --max_path_width 2 --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} | shuf > ${TRAIN_DATA_FILE} 2>> error_log.txt
+${PYTHON} JavaExtractor/extract.py --dir "${TRAIN_DIR}" --max_path_length 8 --max_path_width 2 --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} | shuf > ${TRAIN_DATA_FILE} 2>> error_log.txt
 echo "Finished extracting paths from training set"
 
 TARGET_HISTOGRAM_FILE=data/${DATASET_NAME}/${DATASET_NAME}.histo.tgt.c2s
@@ -60,13 +74,14 @@ cat ${TRAIN_DATA_FILE} | cut -d' ' -f1 | tr '|' '\n' | awk '{n[$0]++} END {for (
 cat ${TRAIN_DATA_FILE} | cut -d' ' -f2- | tr ' ' '\n' | cut -d',' -f1,3 | tr ',|' '\n' | awk '{n[$0]++} END {for (i in n) print i,n[i]}' > ${SOURCE_SUBTOKEN_HISTOGRAM}
 cat ${TRAIN_DATA_FILE} | cut -d' ' -f2- | tr ' ' '\n' | cut -d',' -f2 | tr '|' '\n' | awk '{n[$0]++} END {for (i in n) print i,n[i]}' > ${NODE_HISTOGRAM_FILE}
 
-${PYTHON} preprocess.py --train_data ${TRAIN_DATA_FILE} --test_data ${TEST_DATA_FILE} --val_data ${VAL_DATA_FILE} \
+${PYTHON} preprocess.py --train_data "${TRAIN_DATA_FILE}" --test_data "${TEST_DATA_FILE}" --val_data "${VAL_DATA_FILE}" \
   --max_contexts ${MAX_CONTEXTS} --max_data_contexts ${MAX_DATA_CONTEXTS} --subtoken_vocab_size ${SUBTOKEN_VOCAB_SIZE} \
   --target_vocab_size ${TARGET_VOCAB_SIZE} --subtoken_histogram ${SOURCE_SUBTOKEN_HISTOGRAM} \
   --node_histogram ${NODE_HISTOGRAM_FILE} --target_histogram ${TARGET_HISTOGRAM_FILE} --output_name data/${DATASET_NAME}/${DATASET_NAME}
     
 # If all went well, the raw data files can be deleted, because preprocess.py creates new files 
 # with truncated and padded number of paths for each example.
+# you commented this!
 rm ${TRAIN_DATA_FILE} ${VAL_DATA_FILE} ${TEST_DATA_FILE} ${TARGET_HISTOGRAM_FILE} ${SOURCE_SUBTOKEN_HISTOGRAM} \
   ${NODE_HISTOGRAM_FILE}
 
