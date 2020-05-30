@@ -39,15 +39,15 @@
 # TRAIN_DIR="/mnt/c/Users/Akhil Chandra/Desktop/btp/CodeSearchNet/parseddata/train"
 # VAL_DIR="/mnt/c/Users/Akhil Chandra/Desktop/btp/CodeSearchNet/parseddata/valid"
 # TEST_DIR="/mnt/c/Users/Akhil Chandra/Desktop/btp/CodeSearchNet/parseddata/test"
-TRAIN_DIR= "../../../../gdrive/My Drive/btp/individual_CSN_java_files/train/"
-VAL_DIR= "../../../../gdrive/My Drive/btp/individual_CSN_java_files/valid/"
-TEST_DIR="../../../../gdrive/My Drive/btp/individual_CSN_java_files/test/"
-DATASET_NAME=parseddata_valid
+TRAIN_DIR="../individual_CSN_java_files/train/"
+VAL_DIR="../individual_CSN_java_files/valid/"
+TEST_DIR="../individual_CSN_java_files/test/"
+DATASET_NAME=CodeSearchNet_BTP_2020
 MAX_DATA_CONTEXTS=1000
 MAX_CONTEXTS=200
 SUBTOKEN_VOCAB_SIZE=186277
 TARGET_VOCAB_SIZE=26347
-NUM_THREADS=4
+NUM_THREADS=8
 PYTHON=python3
 ###########################################################
 
