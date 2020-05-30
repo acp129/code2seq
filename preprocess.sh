@@ -35,10 +35,14 @@
 #added "" to every instance of the below part
 
 
-TRAIN_DIR="/mnt/c/Users/Akhil Chandra/Desktop/btp/CodeSearchNet/notebooks/train_dummy"
-VAL_DIR="/mnt/c/Users/Akhil Chandra/Desktop/btp/CodeSearchNet/notebooks/valid_dummy"
-TEST_DIR="/mnt/c/Users/Akhil Chandra/Desktop/btp/CodeSearchNet/notebooks/test_code_codesearchnet"
-DATASET_NAME=preproc_codesearch
+
+# TRAIN_DIR="/mnt/c/Users/Akhil Chandra/Desktop/btp/CodeSearchNet/parseddata/train"
+# VAL_DIR="/mnt/c/Users/Akhil Chandra/Desktop/btp/CodeSearchNet/parseddata/valid"
+# TEST_DIR="/mnt/c/Users/Akhil Chandra/Desktop/btp/CodeSearchNet/parseddata/test"
+TRAIN_DIR= "../../../gdrive/My Drive/btp/individual_CSN_java_files/train/"
+VAL_DIR= "../../../gdrive/My Drive/btp/individual_CSN_java_files/valid/"
+TEST_DIR="../../../gdrive/My Drive/btp/individual_CSN_java_files/test/"
+DATASET_NAME=parseddata_valid
 MAX_DATA_CONTEXTS=1000
 MAX_CONTEXTS=200
 SUBTOKEN_VOCAB_SIZE=186277
