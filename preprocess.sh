@@ -39,9 +39,9 @@
 # TRAIN_DIR="/mnt/c/Users/Akhil Chandra/Desktop/btp/CodeSearchNet/parseddata/train"
 # VAL_DIR="/mnt/c/Users/Akhil Chandra/Desktop/btp/CodeSearchNet/parseddata/valid"
 # TEST_DIR="/mnt/c/Users/Akhil Chandra/Desktop/btp/CodeSearchNet/parseddata/test"
-TRAIN_DIR="../individual_CSN_java_files/train/"
-VAL_DIR="../individual_CSN_java_files/valid/"
-TEST_DIR="../individual_CSN_java_files/test/"
+TRAIN_DIR="../group_CSN_java_files/train/"
+VAL_DIR="../group_CSN_java_files/valid/"
+TEST_DIR="../group_CSN_java_files/test/"
 DATASET_NAME=CodeSearchNet_BTP_2020
 MAX_DATA_CONTEXTS=1000
 MAX_CONTEXTS=200
